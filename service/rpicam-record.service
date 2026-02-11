@@ -1,0 +1,17 @@
+[Unit]
+Description=Raspberry Pi Continuous Recording with rpicam (1h split)
+After=network-online.target mnt-recordings.mount
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/rpicam-record.sh
+Restart=always
+RestartSec=5
+User=
+
+# カメラやSambaが一瞬詰まっても死なないため
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
